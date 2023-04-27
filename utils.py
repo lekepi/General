@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, date
 from models import session, TaskChecker
 
 
@@ -52,3 +52,28 @@ def find_past_date(my_date, days):
     return cur_date
 
 
+def get_eom(my_date):
+    if my_date.month == 12:
+        last_date = date(my_date.year + 1, 1, 1) - timedelta(days=1)
+    else:
+        last_date = date(my_date.year, my_date.month + 1, 1) - timedelta(days=1)
+    # if sunday go back
+    if last_date.weekday() == 6:
+        last_date = last_date - timedelta(days=1)
+    return last_date
+
+
+def get_next_eom(my_date):
+    # get a date for next month
+    next_month = my_date.month + 1
+    if next_month == 13:
+        next_month = 1
+        next_year = my_date.year + 1
+    else:
+        next_year = my_date.year
+    next_month_date = date(next_year, next_month, 1)
+    last_date = get_eom(next_month_date)
+    if last_date.weekday() == 6:
+        last_date = last_date - timedelta(days=1)
+    #   last_date -= timedelta(days=last_date.weekday() - 4)
+    return last_date
