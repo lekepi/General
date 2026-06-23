@@ -37,7 +37,7 @@ def get_reports(re_list, frequency, start_date, end_date, input_path, output_pat
             current_date += timedelta(days=1)
 
 
-def run_income_expense_reports():
+def run_gs_income_expense_reports():
 
     # 1) define the file name pattern and put them in a list:
     re_dat = re.compile(r'^SRTCS_219502_1200583322_incexpclt*_06023181_950.dat$')
@@ -48,10 +48,9 @@ def run_income_expense_reports():
     # For a specific day, put start_date=end_date and frequency = 'Day'
     # frequency = 'EOM'
     frequency = 'Day'
-    start_date = date(2022, 10, 29)
-    end_date = date(2022, 10, 29)
+    start_date = date(2022, 2, 26)
+    end_date = date(2022, 2, 26)
     # end_date = date.today()
-
 
     # 3) define the input and output path and renaming rule
     input_path = r'A:\Reporting Files\GS\Download'
@@ -63,4 +62,4 @@ def run_income_expense_reports():
 
 
 if __name__ == '__main__':
-    run_income_expense_reports()
+    run_gs_income_expense_reports()
